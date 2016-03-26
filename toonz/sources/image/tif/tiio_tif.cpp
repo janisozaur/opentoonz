@@ -475,7 +475,11 @@ void TifReader::readLine(short *buffer, int x0, int x1, int shrink)
 			}
 		} else {
 			int y = m_rowsPerStrip * m_stripIndex;
+#if !defined(LINUX)
 			int ok = TIFFReadRGBAStrip_64(m_tiff, y, (uint64 *)m_stripBuffer);
+#else
+			int ok = TIFFReadRGBAStrip(m_tiff, y, (uint32 *)m_stripBuffer);
+#endif
 			assert(ok);
 		}
 	}

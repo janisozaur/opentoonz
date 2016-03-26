@@ -1,5 +1,4 @@
 
-
 #include "tstream.h"
 #include "tpersist.h"
 #include "tfilepath_io.h"
@@ -15,6 +14,10 @@
 
 #include <sstream>
 #include <memory>
+
+#if defined(LINUX)
+#include <memory>
+#endif
 
 using namespace std;
 

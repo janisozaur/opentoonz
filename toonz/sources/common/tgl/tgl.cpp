@@ -14,6 +14,8 @@
 #include <GL/glut.h>
 #elif defined(LINUX)
 #include <GL/glut.h>
+#elif defined(LINUX)
+#include <GL/glut.h>
 #else
 #include <GLUT/glut.h>
 #endif

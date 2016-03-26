@@ -316,10 +316,12 @@ public:
 	GLXContext m_context;
 	GLXPixmap m_pixmap;
 	Pixmap m_xpixmap;
+	TRaster32P m_raster;
 
 	//-----------------------------------------------------------------------------
 
-	XImplementation(TDimension rasterSize)
+	XImplementation(TDimension rasterSize) :
+	    TOfflineGL::Imp(rasterSize.lx, rasterSize.ly)
 	{
 		createContext(rasterSize);
 
@@ -505,6 +507,8 @@ public:
 std::shared_ptr<TOfflineGL::Imp> defaultOfflineGLGenerator(const TDimension &dim, std::shared_ptr<TOfflineGL::Imp> shared)
 {
 	return std::make_shared<XImplementation>(dim);
+#warning here
+	return NULL;
 }
 
 #elif MACOSX

@@ -1019,8 +1019,10 @@ void SceneViewer::drawBackground()
 		PROC proc = wglGetProcAddress("glCheckFramebufferStatusEXT");
 		if (proc != nullptr)
 			status = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC>(proc)(GL_FRAMEBUFFER);
-#else
+#elif MACOSX
 		status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+#else
+		status = 0;  /* XXX, stub */
 #endif
 		printf("GL_INVALID_FRAMEBUFFER_OPERATION: framebuffer:%d\n", status);
 	}
@@ -1033,8 +1035,10 @@ bool check_framebuffer_status()
 	if (proc == nullptr)
 		return true;
 	GLenum s = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC>(proc)(GL_FRAMEBUFFER);
-#else
+#elif MACOSX
 	GLenum s = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+#else
+	GLenum s = GL_FRAMEBUFFER_COMPLETE;  /* XXX, stub */
 #endif
 	if (s == GL_FRAMEBUFFER_UNDEFINED)
 		printf("Warning: FB undefined: %d\n", s);
