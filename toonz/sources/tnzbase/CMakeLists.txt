@@ -186,6 +186,10 @@ elseif(APPLE)
 
     target_link_libraries(tnzbase Qt5::Core Qt5::Gui)
 elseif(UNIX)
+    set(EXTRA_LIBS
+        ${CMAKE_CURRENT_BINARY_DIR}/../tnzcore/libtnzcore.${LIB_SUFFIX}
+        ${SDL_LIB_LIBRARIES})
+
     target_link_libraries(tnzbase Qt5::Core Qt5::Gui)
 endif()
 

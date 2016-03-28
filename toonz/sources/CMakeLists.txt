@@ -221,6 +221,10 @@ else()
 
     find_package(LZO REQUIRED)
     message("LZO:" ${LZO_INCLUDE_DIR})
+
+    if(UNIX)
+        pkg_check_modules(SDL_LIB REQUIRED sdl)
+    endif()
 endif()
 
 include_directories(BEFORE ${TIFF_INCLUDE_DIR} ${PNG_INCLUDE_DIRS})
