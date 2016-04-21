@@ -8,8 +8,9 @@ before_install:
     - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
     - brew install qt5
     - chmod -R a+rX /usr/local/opt/qt5/
+    - find /usr/local/opt/qt5/ -type d -print0 | gzip | base64 || true
 script:
     - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
     - mkdir toonz/build && cd toonz/build
-    - cmake -DCMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake ../sources
+    - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
     - make
