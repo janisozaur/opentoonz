@@ -18,6 +18,8 @@ build_script:
 
         move thirdparty\libpng-1.6.21\scripts\pnglibconf.h.prebuilt thirdparty\libpng-1.6.21\pnglibconf.h
 
+        move C:\Libraries\boost_1_59_0 thirdparty\boost
+
         mkdir toonz\build
 
         cd toonz\build
