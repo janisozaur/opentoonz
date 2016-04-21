@@ -14,7 +14,7 @@ message("Thirdpary Library Search path:" ${THIRDPARTY_LIBS_HINTS})
 
 if (WIN32)
     message("Windows System")
-    set(QT_PATH "C:/Qt/Qt5.5.1/5.5/msvc2013_64" CACHE PATH "Qt instlattion directory")
+    set(QT_PATH "C:/Qt/Qt5.6/5.5/msvc2015_64" CACHE PATH "Qt instlattion directory")
     if(NOT EXISTS ${QT_PATH})
         message("Specify QT_PATH properly")
         return()
