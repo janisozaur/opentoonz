@@ -1,0 +1,16 @@
+language: cpp
+os: osx
+osx_image: xcode7.3
+before_install:
+    - curl -L -O http://netcologne.dl.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.gz
+    - tar xzf boost_1_55_0.tar.gz -C thirdparty/boost/
+    - brew update
+    - brew unlink cmake
+    - brew update cmake
+    - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
+    - brew install qt5
+script:
+    - pushd opentoonz/thirdparty/tiff-4.0.3 && ./configure && make && popd
+    - mkdir toonz/build && cd toonz/build
+    - cmake ../sources
+    - make
