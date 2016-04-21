@@ -25,5 +25,6 @@ before_script:
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
 
 script:
-    - echo $COVERITY_SCAN_BUILD
-    - $COVERITY_SCAN_BUILD
+    - curl -L -O $COVERITY_SCAN_BUILD_URL
+    - chmod a+x travisci_build_coverity_scan.sh
+    - ./travisci_build_coverity_scan.sh
