@@ -4,8 +4,6 @@ os: Visual Studio 2013
 init:
     - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-platform: x64
-
 on_finish:
     - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
@@ -36,6 +34,6 @@ build_script:
 
         set PATH=%PATH%:%QTDIR%\bin
 
-        cmake -DQT_PATH=%QT_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% ..\sources
+        cmake -DQT_PATH=%QT_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DCMAKE_GENERATOR_PLATFORM=x64 ..\sources
 
-        msbuild /p:Configuration=Release OpenToonz.sln /v:Minimal /v:Platform=x64
+        msbuild /p:Configuration=Release OpenToonz.sln /v:Minimal
