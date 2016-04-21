@@ -28,8 +28,10 @@ build_script:
 
         set QT_PATH="C:\Qt\5.6\msvc2015_64"
 
+        set CMAKE_PREFIX_PATH=%QTDIR%;%CMAKE_PREFIX_PATH%
+
         set PATH=%PATH%:%QTDIR%\bin
 
-        cmake -DQT_PATH=%QT_PATH% ..\sources
+        cmake -DQT_PATH=%QT_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% ..\sources
 
         msbuild /p:Configuration=Release OpenToonz.sln /v:Minimal
