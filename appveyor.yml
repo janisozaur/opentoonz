@@ -15,7 +15,7 @@ build_script:
 
         cd toonz\build
 
-        set QT_DIR="C:\Qt\5.6\msvc2015"
+        set QT_DIR="C:\Qt\5.6\msvc2015_64"
 
         cmake ..\sources
 
