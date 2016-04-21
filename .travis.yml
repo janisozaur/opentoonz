@@ -6,7 +6,7 @@ before_install:
     - tar xzf boost_1_55_0.tar.gz -C thirdparty/boost/
     - brew update
     - brew unlink cmake
-    - brew update cmake
+    - brew install cmake
     - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
     - brew install qt5
 script:
