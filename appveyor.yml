@@ -23,6 +23,6 @@ build_script:
 
         set PATH=%PATH%:%QTDIR%\bin
 
-        cmake ..\sources
+        cmake -DQT_PATH=%QT_PATH% ..\sources
 
         msbuild /p:Configuration=Release OpenToonz.sln /v:Minimal
