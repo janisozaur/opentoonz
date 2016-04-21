@@ -1,5 +1,5 @@
 version: 0.0.1.{build}
-os: Visual Studio 2015
+os: Visual Studio 2013
 
 init:
     - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -22,11 +22,11 @@ build_script:
 
         cd toonz\build
 
-        set QT_DIR="C:\Qt\5.6\msvc2015_64"
+        set QT_DIR="C:\Qt\5.5\msvc2013_64"
 
-        set QTDIR="C:\Qt\5.6\msvc2015_64"
+        set QTDIR="C:\Qt\5.5\msvc2013_64"
 
-        set QT_PATH="C:\Qt\5.6\msvc2015_64"
+        set QT_PATH="C:\Qt\5.5\msvc2013_64"
 
         set CMAKE_PREFIX_PATH=%QTDIR%;%CMAKE_PREFIX_PATH%
 
