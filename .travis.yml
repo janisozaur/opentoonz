@@ -40,7 +40,7 @@ script:
     - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
     - mkdir toonz/build && cd toonz/build
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
-    - cov-build --dir cov-int make -k
+    - cov-build --dir cov-int make -k || true
 
 after_success:
     - tar czf $RESULTS_ARCHIVE cov-int
