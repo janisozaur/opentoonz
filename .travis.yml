@@ -20,7 +20,7 @@ before_install:
     - brew update
     - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
     - brew install qt55 wget
-    - chmod -R a+rX /usr/local/opt/qt5/
+    - chmod -R a+rX /usr/local/Cellar/qt55 || true
     - export PLATFORM=$(uname)
     - export TOOL_ARCHIVE=/tmp/cov-analysis-${PLATFORM}.tgz
     - export TOOL_URL=https://scan.coverity.com/download/${PLATFORM}
