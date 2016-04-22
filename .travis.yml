@@ -10,21 +10,49 @@ env:
     - COVERITY_SCAN_BRANCH_PATTERN="coverity-2"
     - COVERITY_SCAN_BUILD_COMMAND="make -j2"
     - COVERITY_SCAN_BUILD_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
-    - COVERITY_SCAN_BUILD="curl -s $COVERITY_SCAN_BUILD_URL | bash"
+    - TOOL_BASE=/tmp/coverity-scan-analysis
+    - UPLOAD_URL="http://scan5.coverity.com/cgi-bin/travis_upload.py"
+    - RESULTS_ARCHIVE=analysis-results.tgz
     - secure: "S77aAnr26eW+jpt2UV4NMkYL47BMSeeo9iSLOI3ByjgmLKHvSSJUqC22OJbio3/dEdgkVhvEQn3fLM/QTMKBUgGTI5MSB0kYVhAY1vM1nSr2/QiDsZcUpBZ0UG78BLAgaB0Z52r/0FOFejS3PRVLVzXCIwp4tqyqZFPy5E5f23oTY33GmypldfBYUeBK4F8WfaF3HgOtZT4OMgfs2qdr27crkjbbh+4S2BEyMzYt3oadj8PVsvSrNdvHJoSnaeMUQ2ACGN6t7uQQizjjN/944FydTP+sbV6+T5BkRXj53NnFJVVmZE3B2hT9SSkcmDllV19DGmwzSRxu+zJTuFnuMbNNtiS/v8+h5jf9NUlj1fzK6LT41HequHzWaP29CYBdmUh/dxRek+b95i5SeRAsVTFWXDTj1UVF0p8FkUVFS+lb/T9Tz4Xny5ZAP4TLZDeGQ8blumeDKG0MxfhjomPMhvcDh//Mf7wmvmxYPdGF0MI0ziytp5R7ZViAtlOB0VZB2Zu7RJir0ft1p43Q7w/PWuBTPCpkPb9riuUTau7Syyy0jCmjSnMYcl/T+NU3OTiIaRPcvpi4Z4efKotCiTjFmZ+S5DBj+S4h6aWBDxjEPc/fjLbztAyykntjD3ZZFkrHnDmqPrNcrpAFTVXh1n0qi+PNFwoIW7JU0W43UAagioc="
 
 before_install:
     - brew update
     - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
-    - brew install qt5
+    - brew install qt5 wget
     - chmod -R a+rX /usr/local/opt/qt5/
+    - export PLATFORM=$(uname)
+    - export TOOL_ARCHIVE=/tmp/cov-analysis-${PLATFORM}.tgz
+    - export TOOL_URL=https://scan.coverity.com/download/${PLATFORM}
 
 before_script:
     - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
     - mkdir toonz/build && cd toonz/build
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
+    - wget -nv -O $TOOL_ARCHIVE $TOOL_URL --post-data "project=$COVERITY_SCAN_PROJECT_NAME&token=$COVERITY_SCAN_TOKEN"
+    - mkdir -p $TOOL_BASE
+    - pushd $TOOL_BASE
+    - tar xzf $TOOL_ARCHIVE
+    - popd
+    - export TOOL_DIR=`find $TOOL_BASE -type d -name 'cov-analysis*'`
+    - export PATH=$TOOL_DIR/bin:$PATH
 
 script:
-    - curl -L -O $COVERITY_SCAN_BUILD_URL
-    - chmod a+x travisci_build_coverity_scan.sh
-    - ./travisci_build_coverity_scan.sh
+    - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
+    - mkdir toonz/build && cd toonz/build
+    - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
+    - cov-build --dir cov-int make -k
+
+after_success:
+    - tar czf $RESULTS_ARCHIVE cov-int
+    - ls -lh
+    - curl --progress-bar --upload-file opentoonz.tar.gz https://transfer.sh/opentoonz.tar.gz
+    - export SHA=`git rev-parse --short HEAD`
+    - curl \
+      --progress-bar \
+      --form project=$COVERITY_SCAN_PROJECT_NAME \
+      --form token=$COVERITY_SCAN_TOKEN \
+      --form email=$COVERITY_SCAN_NOTIFICATION_EMAIL \
+      --form file=@$RESULTS_ARCHIVE \
+      --form version=$SHA \
+      --form description=$SHA \
+      $UPLOAD_URL
