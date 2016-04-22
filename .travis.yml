@@ -13,6 +13,7 @@ env:
     - TOOL_BASE=/tmp/coverity-scan-analysis
     - UPLOAD_URL="http://scan5.coverity.com/cgi-bin/travis_upload.py"
     - RESULTS_ARCHIVE=analysis-results.tgz
+    - COVERITY_UNSUPPORTED=1
     - secure: "S77aAnr26eW+jpt2UV4NMkYL47BMSeeo9iSLOI3ByjgmLKHvSSJUqC22OJbio3/dEdgkVhvEQn3fLM/QTMKBUgGTI5MSB0kYVhAY1vM1nSr2/QiDsZcUpBZ0UG78BLAgaB0Z52r/0FOFejS3PRVLVzXCIwp4tqyqZFPy5E5f23oTY33GmypldfBYUeBK4F8WfaF3HgOtZT4OMgfs2qdr27crkjbbh+4S2BEyMzYt3oadj8PVsvSrNdvHJoSnaeMUQ2ACGN6t7uQQizjjN/944FydTP+sbV6+T5BkRXj53NnFJVVmZE3B2hT9SSkcmDllV19DGmwzSRxu+zJTuFnuMbNNtiS/v8+h5jf9NUlj1fzK6LT41HequHzWaP29CYBdmUh/dxRek+b95i5SeRAsVTFWXDTj1UVF0p8FkUVFS+lb/T9Tz4Xny5ZAP4TLZDeGQ8blumeDKG0MxfhjomPMhvcDh//Mf7wmvmxYPdGF0MI0ziytp5R7ZViAtlOB0VZB2Zu7RJir0ft1p43Q7w/PWuBTPCpkPb9riuUTau7Syyy0jCmjSnMYcl/T+NU3OTiIaRPcvpi4Z4efKotCiTjFmZ+S5DBj+S4h6aWBDxjEPc/fjLbztAyykntjD3ZZFkrHnDmqPrNcrpAFTVXh1n0qi+PNFwoIW7JU0W43UAagioc="
 
 before_install:
@@ -26,7 +27,6 @@ before_install:
 
 before_script:
     - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
-    - mkdir toonz/build && cd toonz/build
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
     - wget -nv -O $TOOL_ARCHIVE $TOOL_URL --post-data "project=$COVERITY_SCAN_PROJECT_NAME&token=$COVERITY_SCAN_TOKEN"
     - mkdir -p $TOOL_BASE
@@ -35,10 +35,9 @@ before_script:
     - popd
     - export TOOL_DIR=`find $TOOL_BASE -type d -name 'cov-analysis*'`
     - export PATH=$TOOL_DIR/bin:$PATH
+    - mkdir toonz/build && cd toonz/build
 
 script:
-    - pushd thirdparty/tiff-4.0.3 && ./configure && make && popd
-    - mkdir toonz/build && cd toonz/build
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake ../sources
     - cov-build --dir cov-int make -k || true
 
