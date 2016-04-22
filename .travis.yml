@@ -16,6 +16,7 @@ env:
 
 before_install:
     - brew update
+    - brew unlink pkg-config libpng
     - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
     - brew install qt55 wget
     - chmod -R a+rX /usr/local/Cellar/qt55 || true
