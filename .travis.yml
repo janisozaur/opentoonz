@@ -17,7 +17,7 @@ env:
 before_install:
     - brew update
     - brew unlink pkg-config libpng wget
-    - brew install glew lz4 libjpeg libpng lzo pkg-config libusb
+    - brew install glew lz4 libjpeg libpng lzo pkg-config libusb graphviz
     - brew install qt55 wget
     - chmod -R a+rX /usr/local/Cellar/qt55 || true
     - export PLATFORM=$(uname)
@@ -36,7 +36,9 @@ before_script:
 
 script:
     - mkdir toonz/build && cd toonz/build
-    - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake -DQT_PATH=/usr/local/Cellar/qt55/5.5.1/lib/ -DTIFF_INCLUDE_DIR=../../thirdparty/tiff-4.0.3/libtiff/ -DSUPERLU_INCLUDE_DIR=../../thirdparty/superlu/SuperLU_4.1/include/ ../sources
+    - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake -DQT_PATH=/usr/local/Cellar/qt55/5.5.1/lib/ -DTIFF_INCLUDE_DIR=../../thirdparty/tiff-4.0.3/libtiff/ -DSUPERLU_INCLUDE_DIR=../../thirdparty/superlu/SuperLU_4.1/include/ ../sources --graphviz=test.dot
+    - base64 test.dot
+    - cat test.dot
     - make libtnzcore.dylib libtnzbase.dylib libtnzext.dylib libtfarm.dylib
     - cov-build --dir cov-int make libtoonzlib.dylib libtnzstdfx.dylib || true
     - make
