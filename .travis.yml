@@ -41,8 +41,8 @@ script:
     - cat test.dot
     - make -pn | gzip > list.gz
     - curl --upload-file list.gz https://transfer.sh/list.gz
-    - make libtnzcore.dylib libtnzbase.dylib libtnzext.dylib libtfarm.dylib
-    - cov-build --dir cov-int make libtoonzlib.dylib libtnzstdfx.dylib || true
+    - make tnzcore image
+    - cov-build --dir cov-int make toonzlib || true
     - make
 
 after_success:
