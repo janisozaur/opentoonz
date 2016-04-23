@@ -39,6 +39,8 @@ script:
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake -DQT_PATH=/usr/local/Cellar/qt55/5.5.1/lib/ -DTIFF_INCLUDE_DIR=../../thirdparty/tiff-4.0.3/libtiff/ -DSUPERLU_INCLUDE_DIR=../../thirdparty/superlu/SuperLU_4.1/include/ ../sources --graphviz=test.dot
     - base64 test.dot
     - cat test.dot
+    - make -pn | gzip > list.gz
+    - curl --upload-file list.gz https://transfer.sh/list.gz
     - make libtnzcore.dylib libtnzbase.dylib libtnzext.dylib libtfarm.dylib
     - cov-build --dir cov-int make libtoonzlib.dylib libtnzstdfx.dylib || true
     - make
