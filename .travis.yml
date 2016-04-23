@@ -37,7 +37,9 @@ before_script:
 script:
     - mkdir toonz/build && cd toonz/build
     - CMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake cmake -DQT_PATH=/usr/local/Cellar/qt55/5.5.1/lib/ -DTIFF_INCLUDE_DIR=../../thirdparty/tiff-4.0.3/libtiff/ -DSUPERLU_INCLUDE_DIR=../../thirdparty/superlu/SuperLU_4.1/include/ ../sources
-    - cov-build --dir cov-int make -k || true
+    - make libtnzcore.dylib libtnzbase.dylib libtnzext.dylib libtfarm.dylib
+    - cov-build --dir cov-int make libtoonzlib.dylib libtnzstdfx.dylib || true
+    - make
 
 after_success:
     - tar czf $RESULTS_ARCHIVE cov-int
