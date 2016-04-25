@@ -320,9 +320,9 @@ add_translation(toonzlib ${HEADERS} ${SOURCES})
 qt5_wrap_cpp(SOURCES ${MOC_HEADERS})
 
 add_library(toonzlib SHARED ${HEADERS} ${SOURCES})
-if(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtoonzlib.${LIB_SUFFIX}")
-endif()
+if (APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtoonzlib.${CMAKE_SHARED_LIBRARY_SUFFIX}")
+endif (APPLE)
 
 add_definitions(-DTOONZLIB_EXPORTS)
 

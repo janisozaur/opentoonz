@@ -155,8 +155,8 @@ qt5_wrap_cpp(SOURCES ${MOC_HEADERS})
 
 add_library(tnzbase SHARED ${HEADERS} ${SOURCES} ${OBJCSOURCES})
 
-if(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtnzbase.dylib")
+if (APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtnzbase.${CMAKE_SHARED_LIBRARY_SUFFIX}")
 endif()
 
 add_definitions(-DTNZBASE_EXPORTS -DTPARAM_EXPORTS -DTXSHEET_EXPORTS -DTFX_EXPORTS -DTAPPTOOLS_EXPORTS -DTTEST_EXPORTS)
@@ -178,7 +178,7 @@ elseif(APPLE)
     find_library(COCOA_LIB Cocoa)
 
     set(EXTRA_LIBS
-		${CMAKE_CURRENT_BINARY_DIR}/../tnzcore/libtnzcore.${LIB_SUFFIX}
+        ${CMAKE_CURRENT_BINARY_DIR}/../tnzcore/libtnzcore.${CMAKE_SHARED_LIBRARY_SUFFIX}
         ${USB_LIB}
         ${TWAIN_LIB}
         ${IOKIT_LIB}

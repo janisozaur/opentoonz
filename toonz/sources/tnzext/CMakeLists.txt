@@ -74,9 +74,9 @@ endif()
 
 add_library(tnzext SHARED ${HEADERS} ${SOURCES} ${OBJCSOURCES})
 
-if(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtnzext.${LIB_SUFFIX}")
-endif()
+if (APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-install_name,@rpath/libtnzext.${CMAKE_SHARED_LIBRARY_SUFFIX}")
+endif (APPLE)
 
 add_definitions(-DTNZEXT_EXPORTS)
 
