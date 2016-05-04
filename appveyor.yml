@@ -36,4 +36,4 @@ build_script:
 
         cmake -DQT_PATH=%QT_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DCMAKE_GENERATOR_PLATFORM=x64 ..\sources
 
-        msbuild /p:Configuration=Release OpenToonz.sln /v:Minimal
+        msbuild /p:Configuration=Debug OpenToonz.sln /v:Minimal
