@@ -1,0 +1,39 @@
+version: 0.0.1.{build}
+os: Visual Studio 2015
+
+init:
+    - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+on_finish:
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+build_script:
+    - cmd:
+        >-
+        move thirdparty\LibJPEG\jpeg-9\jconfig.vc thirdparty\LibJPEG\jpeg-9\jconfig.h
+
+        move thirdparty\tiff-4.0.3\libtiff\tif_config.vc.h thirdparty\tiff-4.0.3\libtiff\tif_config.h
+
+        move thirdparty\tiff-4.0.3\libtiff\tiffconf.vc.h thirdparty\tiff-4.0.3\libtiff\tiffconf.h
+
+        move thirdparty\libpng-1.6.21\scripts\pnglibconf.h.prebuilt thirdparty\libpng-1.6.21\pnglibconf.h
+
+        move C:\Libraries\boost_1_59_0 thirdparty\boost
+
+        mkdir toonz\build
+
+        cd toonz\build
+
+        set QT_DIR="C:\Qt\5.6\msvc2015_64"
+
+        set QTDIR="C:\Qt\5.6\msvc2015_64"
+
+        set QT_PATH="C:\Qt\5.6\msvc2015_64"
+
+        set CMAKE_PREFIX_PATH=%QTDIR%;%CMAKE_PREFIX_PATH%
+
+        set PATH=%PATH%:%QTDIR%\bin
+
+        cmake -DQT_PATH=%QT_PATH% -DCMAKE_PREFIX_PATH=%CMAKE_PREFIX_PATH% -DCMAKE_GENERATOR_PLATFORM=x64 ..\sources
+
+        msbuild /p:Configuration=Debug OpenToonz.sln /v:Minimal
