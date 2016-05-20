@@ -91,7 +91,7 @@ if(WIN32)
     set(EXTRA_LIBS
         ${TNZLIBS}
         vfw32.lib)
-else()
+elseif(APPLE)
     if(PLATFORM EQUAL 32)
         find_library(CORE_SERVICES_LIB CoreServices)
         set(OSX_10_6_SDK_PATH "")
