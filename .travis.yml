@@ -5,7 +5,7 @@ compiler: clang
 before_install:
     - brew update
 install:
-    - brew install qt55 glew lz4 lzo libusb
+    - brew install qt55 glew lz4 lzo libusb cmake
 script:
     - pushd thirdparty/tiff-4.0.3
     - ./configure && make
