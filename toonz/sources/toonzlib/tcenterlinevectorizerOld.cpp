@@ -1718,14 +1718,11 @@ junctionMaxDist)
 						else
 							++(it_link->m_order);
 					}
-					else*/ if (it_link == m_links.end() &&
-                                                   std::find(
-                                                       joinJunctions.begin(),
-                                                       joinJunctions.end(),
-                                                       JunctionMerge(
-                                                           prevNode
-                                                               ->m_junction)) ==
-                                                       joinJunctions.end()) {
+					else*/ if (
+              it_link == m_links.end() &&
+              std::find(joinJunctions.begin(), joinJunctions.end(),
+                        JunctionMerge(prevNode->m_junction)) ==
+                  joinJunctions.end()) {
             joinJunctions.push_back(
                 JunctionMerge(prevNode->m_junction, currNode, prevNode, false));
           }
@@ -1749,14 +1746,11 @@ junctionMaxDist )
 						else
 							++(it_link->m_order);
 					}
-					else*/ if (it_link == m_links.end() &&
-                                                   std::find(
-                                                       joinJunctions.begin(),
-                                                       joinJunctions.end(),
-                                                       JunctionMerge(
-                                                           nextNode
-                                                               ->m_junction)) ==
-                                                       joinJunctions.end()) {
+					else*/ if (
+              it_link == m_links.end() &&
+              std::find(joinJunctions.begin(), joinJunctions.end(),
+                        JunctionMerge(nextNode->m_junction)) ==
+                  joinJunctions.end()) {
             joinJunctions.push_back(
                 JunctionMerge(nextNode->m_junction, currNode, nextNode, true));
           }
@@ -1928,7 +1922,7 @@ currNode);
           *otherNode    = *currNode;
           *currNode     = tempNode;
           //					it_temp =
-          //std::find(junction->m_nodes.begin(),
+          // std::find(junction->m_nodes.begin(),
           // junction->m_nodes.end(), currNode);
           //					assert(it_temp !=
           // junction->m_nodes.end());

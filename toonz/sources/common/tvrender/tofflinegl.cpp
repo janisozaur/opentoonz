@@ -526,9 +526,13 @@ public:
                        TOfflineGL::Imp *shared)
       : m_ogl(ogl), m_size(size), m_shared(shared) {}
 
-  void onDeliver() override { m_ogl->m_imp = currentImpGenerator(m_size, m_shared); }
+  void onDeliver() override {
+    m_ogl->m_imp = currentImpGenerator(m_size, m_shared);
+  }
 
-  TThread::Message *clone() const override { return new MessageCreateContext(*this); }
+  TThread::Message *clone() const override {
+    return new MessageCreateContext(*this);
+  }
 };
 
 //} // namespace
