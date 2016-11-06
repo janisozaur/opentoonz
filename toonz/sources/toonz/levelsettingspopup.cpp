@@ -770,8 +770,8 @@ void LevelSettingsPopup::onPathChanged() {
   }
 
   if (oldType != newType ||
-      m_sl->getType() == TZP_XSHLEVEL && newPath.getType() != "tlv" ||
-      m_sl->getType() != TZP_XSHLEVEL && newPath.getType() == "tlv") {
+      (m_sl->getType() == TZP_XSHLEVEL && newPath.getType() != "tlv") ||
+      (m_sl->getType() != TZP_XSHLEVEL && newPath.getType() == "tlv")) {
     error("Wrong path");
     m_pathFld->setPath(toQString(m_sl->getPath()));
     return;

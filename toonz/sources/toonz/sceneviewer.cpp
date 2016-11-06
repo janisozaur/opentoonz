@@ -1196,7 +1196,7 @@ void SceneViewer::drawPreview() {
   }
 
   if (!previewer->isFrameReady(row) ||
-      app->getCurrentFrame()->isPlaying() && previewer->isBusy()) {
+      (app->getCurrentFrame()->isPlaying() && previewer->isBusy())) {
     glColor3d(1, 0, 0);
 
     tglDrawRect(frameRect);
@@ -1230,8 +1230,8 @@ void SceneViewer::drawOverlay() {
   if (!m_drawCameraTest) {
     // draw grid & guides
     if (viewGuideToggle.getStatus() &&
-        (m_vRuler && m_vRuler->getGuideCount() ||
-         m_hRuler && m_hRuler->getGuideCount())) {
+        ((m_vRuler && m_vRuler->getGuideCount()) ||
+         (m_hRuler && m_hRuler->getGuideCount()))) {
       glPushMatrix();
       tglMultMatrix(getViewMatrix());
       ViewerDraw::drawGridAndGuides(

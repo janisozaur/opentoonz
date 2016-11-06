@@ -713,7 +713,7 @@ public:
 
 bool changeFrameSkippingHolds(QKeyEvent *e) {
   if ((e->modifiers() & Qt::ShiftModifier) == 0 ||
-      e->key() != Qt::Key_Down && e->key() != Qt::Key_Up)
+      (e->key() != Qt::Key_Down && e->key() != Qt::Key_Up))
     return false;
   TApp *app        = TApp::instance();
   TFrameHandle *fh = app->getCurrentFrame();

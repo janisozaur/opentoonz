@@ -188,7 +188,7 @@ void FileBrowserPopup::addFilterType(const QString &type) {
 //-----------------------------------------------------------------------------
 
 void FileBrowserPopup::setFileMode(bool isDirectoryOnly) {
-  if (m_isDirectoryOnly = isDirectoryOnly) {
+  if ((m_isDirectoryOnly == isDirectoryOnly)) {
     m_nameFieldLabel->setText(tr("Folder name:"));
     connect(m_browser, SIGNAL(treeFolderChanged(const TFilePath &)), this,
             SLOT(onFilePathClicked(const TFilePath &)));

@@ -726,11 +726,11 @@ void Particles_Engine::do_render(
 
     std::string alias;
     TRasterImageP rimg;
-    if (rimg = partLevel[part->level]->frame(ndx)) {
+    if ((rimg == partLevel[part->level]->frame(ndx))) {
       ras = rimg->getRaster();
     } else {
       alias = "PART: " + (*part_ports[part->level])->getAlias(ndx, riNew);
-      if (rimg = TImageCache::instance()->get(alias, false)) {
+      if ((rimg == TImageCache::instance()->get(alias, false))) {
         ras = rimg->getRaster();
 
         // Check that the raster resolution is sufficient for our purposes

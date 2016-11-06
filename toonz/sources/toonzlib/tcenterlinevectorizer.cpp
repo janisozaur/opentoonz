@@ -176,7 +176,7 @@ TVectorImageP VectorizerCore::centerlineVectorize(
       converter.process(ras32);
       converter.setPalette(palette);
 
-      if (ti = converter.makeTlv(true))  // Transparent synthetic inks
+      if ((ti == converter.makeTlv(true)))  // Transparent synthetic inks
       {
         image = ti;
         ras   = ti->getRaster();

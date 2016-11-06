@@ -168,7 +168,7 @@ TPoint TFont::drawChar(TRasterGR8P &outImage, TPoint &unused, wchar_t charcode,
   QImage image(raw.alphaMapForGlyph(indices[0], QRawFont::PixelAntialiasing));
 
   if (image.format() != QImage::Format_Indexed8)
-    throw TException(L"bad QImage format " + image.format());
+    throw TException(&L"bad QImage format " [ image.format()]);
 
   int height = image.height();
   int width  = image.width();

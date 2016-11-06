@@ -570,7 +570,7 @@ void RenameCellField::renameCell() {
       Preferences::instance()->isAnimationSheetEnabled();
   bool levelDefined =
       xsheet->getCell(m_row, m_col).getSimpleLevel() != 0 ||
-      m_row > 0 && xsheet->getCell(m_row - 1, m_col).getSimpleLevel() != 0;
+      (m_row > 0 && xsheet->getCell(m_row - 1, m_col).getSimpleLevel() != 0);
 
   if (animationSheetEnabled && levelDefined) {
     TXshCell cell       = xsheet->getCell(m_row, m_col);

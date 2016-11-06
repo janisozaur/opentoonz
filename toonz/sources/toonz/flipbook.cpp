@@ -2198,7 +2198,7 @@ void viewFile(const TFilePath &path, int from, int to, int step, int shrink,
   if (path.getType() == "scr") return;
 
   // Avi and movs may be viewed by an external viewer, depending on preferences
-  if (path.getType() == "mov" || path.getType() == "avi" && !flipbook) {
+  if (path.getType() == "mov" || (path.getType() == "avi" && !flipbook)) {
     QString str;
     QSettings().value("generatedMovieViewEnabled", str);
     if (str.toInt() != 0) {

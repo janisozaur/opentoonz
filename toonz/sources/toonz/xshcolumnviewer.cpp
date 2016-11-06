@@ -1101,7 +1101,7 @@ void ColumnArea::drawSoundTextColumnHead(QPainter &p, int col) {
   bool isPrecedentColSelected =
       selection->isColumnSelected(col - 1) && !isEditingSpline;
   // bordo sinistro
-  if (isSelected || col > 0 && isPrecedentColSelected) {
+  if (isSelected || (col > 0 && isPrecedentColSelected)) {
     p.setPen(ColorSelection);
     p.drawLine(rect.x(), orig.y(), rect.x(), height());
     p.setPen(m_viewer->getDarkLineColor());

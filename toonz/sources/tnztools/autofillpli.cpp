@@ -346,7 +346,7 @@ bool rect_autofill_apply(const TVectorImageP &imgToApply, const TRectD &rect,
       regionsReference[from].m_match = to;
       regionsWork[to].m_styleId      = regionsReference[from].m_styleId;
       TRegion *reg                   = regionsWork[to].m_region;
-      if (reg && (!selective || selective && reg->getStyle() == 0)) {
+      if (reg && (!selective || (selective && reg->getStyle() == 0))) {
         reg->setStyle(regionsWork[to].m_styleId);
         filledRegions = true;
       }
@@ -476,7 +476,7 @@ bool stroke_autofill_apply(const TVectorImageP &imgToApply, TStroke *stroke,
       regionsReference[from].m_match = to;
       regionsWork[to].m_styleId      = regionsReference[from].m_styleId;
       TRegion *reg                   = regionsWork[to].m_region;
-      if (reg && (!selective || selective && reg->getStyle() == 0)) {
+      if (reg && (!selective || (selective && reg->getStyle() == 0))) {
         reg->setStyle(regionsWork[to].m_styleId);
         filledRegions = true;
       }

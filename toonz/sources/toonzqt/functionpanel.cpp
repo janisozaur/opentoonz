@@ -1217,8 +1217,8 @@ void FunctionPanel::mousePressEvent(QMouseEvent *e) {
   FunctionTreeModel::Channel *currentChannel =
       m_functionTreeModel ? m_functionTreeModel->getCurrentChannel() : 0;
   if (!currentChannel ||
-      getCurveDistance(currentChannel->getParam(), winPos) > maxDistance &&
-          closestGadgetId < 0) {
+      (getCurveDistance(currentChannel->getParam(), winPos) > maxDistance &&
+          closestGadgetId < 0)) {
     // if current channel is undefined or its curve is too far from the clicked
     // point
     // the user is possibly trying to select a different curve

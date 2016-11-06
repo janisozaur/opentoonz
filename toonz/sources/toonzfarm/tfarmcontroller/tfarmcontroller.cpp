@@ -1132,8 +1132,8 @@ CtrlFarmTask *FarmController::getTaskToStart(FarmServerProxy *server) {
     if ((!server || (task->m_platform == NoPlatform ||
                      task->m_platform == server->m_platform)) &&
         ((task->m_status == Waiting && task->m_priority > maxPriority) ||
-         (task->m_status == Aborted && task->m_failureCount < 3) &&
-             task->m_parentId != "")) {
+         ((task->m_status == Aborted && task->m_failureCount < 3) &&
+             task->m_parentId != ""))) {
       bool dependenciesCompleted = true;
 
       if (task->m_dependencies) {
@@ -2147,7 +2147,7 @@ void FarmController::activateReadyServers() {
     ServerState state = queryServerState2(server->getId());
     int tasksCount    = server->m_tasks.size();
     if (state == Ready ||
-        state == Busy && tasksCount < server->m_maxTaskCount) {
+        (state == Busy && tasksCount < server->m_maxTaskCount)) {
       for (int i = 0; i < (server->m_maxTaskCount - tasksCount); ++i) {
         // cerca un task da sottomettere al server
         CtrlFarmTask *task = getTaskToStart(server);
