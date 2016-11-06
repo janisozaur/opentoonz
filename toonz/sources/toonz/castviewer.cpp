@@ -300,10 +300,10 @@ void CastTreeViewer::dragMoveEvent(QDragMoveEvent *event) {
     rootName = rootName.fromStdWString(name);
   }
   if ((m_dropTargetItem &&
-          m_dropTargetItem->data(0, Qt::DisplayRole).toString() ==
-              AudioFolderName) ||
+       m_dropTargetItem->data(0, Qt::DisplayRole).toString() ==
+           AudioFolderName) ||
       (m_dropFilePath != TFilePath() &&
-          m_dropTargetItem->data(0, Qt::DisplayRole).toString() == rootName))
+       m_dropTargetItem->data(0, Qt::DisplayRole).toString() == rootName))
     m_dropTargetItem = 0;
 
   if (!m_dropTargetItem)

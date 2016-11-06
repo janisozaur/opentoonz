@@ -371,8 +371,8 @@ int ExpressionField::computeSuggestions() {
     while (start > 0) {
       char c = text[start - 1];
       if ((isascii(c) && isalpha(c)) || c == '_' ||
-          (c == '.' && (start - 2 < 0 ||
-                       (isascii(text[start - 2]) && isalpha(text[start - 2]))))) {
+          (c == '.' && (start - 2 < 0 || (isascii(text[start - 2]) &&
+                                          isalpha(text[start - 2]))))) {
       } else
         break;
       start--;

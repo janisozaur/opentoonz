@@ -937,7 +937,7 @@ void FxPainter::contextMenuEvent(QGraphicsSceneContextMenuEvent *cme) {
       menu.addAction(connectToXSheet);
     menu.addAction(duplicateFx);
     if ((zsrc && zsrc->getZeraryFx() &&
-            zsrc->getZeraryFx()->getLinkedFx() != zsrc->getZeraryFx()) ||
+         zsrc->getZeraryFx()->getLinkedFx() != zsrc->getZeraryFx()) ||
         fx->getLinkedFx() != fx)
       menu.addAction(unlinkFx);
   }

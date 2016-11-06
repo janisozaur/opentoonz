@@ -260,9 +260,9 @@ void makeOutline(/*std::ofstream& cout,*/
 
   if (isAlmostAPoint ||
       (q_up && checkPointInOutline(q_up->getPoint(parameterTest), tq,
-                                  parameterTest, error) &&
-          q_down && checkPointInOutline(q_down->getPoint(parameterTest), tq,
-                                        parameterTest, error))) {
+                                   parameterTest, error) &&
+       q_down && checkPointInOutline(q_down->getPoint(parameterTest), tq,
+                                     parameterTest, error))) {
     /*	if (edge.first)
       cout << "left: "<< *(edge.first);
 else

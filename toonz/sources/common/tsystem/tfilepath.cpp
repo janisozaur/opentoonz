@@ -198,9 +198,9 @@ void TFilePath::setPath(std::wstring path) {
   }
   // se si tratta di un path in formato UNC e' del tipo "\\\\MachineName"
   else if ((path.length() >= 3 && path[0] == L'\\' && path[1] == L'\\' &&
-               iswalnum(path[2])) ||
+            iswalnum(path[2])) ||
            (path.length() >= 3 && path[0] == L'/' && path[1] == L'/' &&
-               iswalnum(path[2]))) {
+            iswalnum(path[2]))) {
     isUncName = true;
     m_path.append(2, L'\\');
     m_path.append(1, path[2]);
@@ -236,7 +236,7 @@ void TFilePath::setPath(std::wstring path) {
   // oppure sia UNC (Windows only) )
   if (!((m_path.length() == 1 && m_path[0] == wslash) ||
         (m_path.length() == 3 && iswalpha(m_path[0]) && m_path[1] == L':' &&
-            m_path[2] == wslash)) &&
+         m_path[2] == wslash)) &&
       m_path.length() > 1 && m_path[m_path.length() - 1] == wslash)
     m_path.erase(m_path.length() - 1, 1);
 
@@ -469,10 +469,10 @@ bool TFilePath::isAbsolute() const {
 bool TFilePath::isRoot() const {
   return (m_path.length() == 1 && m_path[0] == slash) ||
          (m_path.length() == 3 && iswalpha(m_path[0]) && m_path[1] == ':' &&
-             m_path[2] == slash) ||
+          m_path[2] == slash) ||
          (m_path.length() > 2 && m_path[0] == slash && m_path[1] == slash &&
-             (std::string::npos == m_path.find(slash, 2) ||
-              m_path.find(slash, 2) == m_path.size() - 1));
+          (std::string::npos == m_path.find(slash, 2) ||
+           m_path.find(slash, 2) == m_path.size() - 1));
 }
 
 //-----------------------------------------------------------------------------

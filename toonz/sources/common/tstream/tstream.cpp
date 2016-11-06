@@ -27,7 +27,7 @@ string escape(string v) {
   for (;;) {
     i = v.find_first_of("\\\'\"", i);
     if (i == (int)string::npos) break;
-    string h = &"\\" [ v[i]];
+    string h = &"\\"[v[i]];
     v.insert(i, "\\");
     i = i + 2;
   }

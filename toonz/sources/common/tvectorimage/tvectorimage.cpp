@@ -1035,7 +1035,8 @@ bool TVectorImage::Imp::areWholeGroups(const std::vector<int> &indexes) const {
     for (j = 0; j < m_strokes.size(); j++) {
       int ret = areDifferentGroup(indexes[i], false, j, false);
       if (ret == -1 ||
-          (ret >= 1 && find(indexes.begin(), indexes.end(), j) == indexes.end()))
+          (ret >= 1 &&
+           find(indexes.begin(), indexes.end(), j) == indexes.end()))
         return false;
     }
   }
@@ -2895,7 +2896,7 @@ void TVectorImage::Imp::regroupGhosts(std::vector<int> &changedStrokes) {
              ((currGroupId.isGrouped(false) != 0 &&
                m_strokes[i]->m_groupId == currGroupId) ||
               (currGroupId.isGrouped(true) != 0 &&
-                  m_strokes[i]->m_groupId.isGrouped(true) != 0))) {
+               m_strokes[i]->m_groupId.isGrouped(true) != 0))) {
         if (m_strokes[i]->m_groupId != currGroupId) {
           m_strokes[i]->m_groupId = currGroupId;
           changedStrokes.push_back(i);

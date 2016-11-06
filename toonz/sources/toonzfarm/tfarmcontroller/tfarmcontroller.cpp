@@ -1133,7 +1133,7 @@ CtrlFarmTask *FarmController::getTaskToStart(FarmServerProxy *server) {
                      task->m_platform == server->m_platform)) &&
         ((task->m_status == Waiting && task->m_priority > maxPriority) ||
          ((task->m_status == Aborted && task->m_failureCount < 3) &&
-             task->m_parentId != ""))) {
+          task->m_parentId != ""))) {
       bool dependenciesCompleted = true;
 
       if (task->m_dependencies) {

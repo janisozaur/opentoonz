@@ -85,7 +85,7 @@ void Tokenizer::setBuffer(std::string buffer) {
         if ((s[i] == 'e' || s[i] == 'E') &&
             ((isascii(s[i + 1]) && isdigit(s[i + 1])) ||
              ((s[i + 1] == '-' || s[i + 1] == '+') && isascii(s[i + 2]) &&
-                 isdigit(s[i + 2])))) {
+              isdigit(s[i + 2])))) {
           token.append(1, s[i++]);
 
           if (s[i] == '-' || s[i] == '+') token.append(1, s[i++]);
